@@ -1,0 +1,80 @@
+.btn {
+    &:link,
+    &:visited {
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 1.5rem 4rem; /* here the first number is for top and bottom and the second for left and right */
+        display: inline-block;
+        border-radius: 10rem;
+        transition: all .2s;
+        position:relative; /* we put this to relative for the button pseudo element can be postionned exactly at the same position of the button. Since it the first relative element in pseudo button element ::after then it will be taken as reference*/
+        font-size: $default-font-size;
+    }
+
+    &:hover {
+        transform: translateY(-3px); /* translate is always related to the initial position of the element */
+        box-shadow: 0 1rem 2rem rgba($color-black,.2); /* offset-x | offset-y | blur-radius | color */
+
+        &::after {
+            transform: scaleX(1.4) scaleY(1.6);
+            opacity:0;
+        }
+    }
+
+    &:active {
+        transform: translate(-1px); /* translate is always related to the initial position of the element */
+        box-shadow: 0 .5rem 1rem rgba($color-black,.2);
+    }
+
+    &--white {
+        background-color: $color-white;
+        color: $color-grey-dark; /* text color */
+
+        &::after {
+            background-color: $color-white;
+        }
+    }
+
+    &::after {
+        content: "";
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        border-radius: 10rem;
+        position: absolute; /* used to get the first parent positionned to relative (here the button) as a reference for positionning*/
+        top: 0;
+        left: 0;
+        z-index: -1; /* used to put the pseudo element behing the button*/
+        transition: all .4s;
+    }
+
+    &--animated {
+        animation: moveInBottom .5s ease-out .75s; /* duration | timing function | animation delay */
+        animation-fill-mode: backwards; /* means the 0% animation state will be applied before the animation starts*/
+    }
+}
+
+.btn-text {
+    &:link,
+    &:visited {
+        font-size: $default-font-size;
+        color: $color-primary;
+        display: inline-block;
+        text-decoration: none;
+        border-bottom: 1px solid $color-primary;
+        padding: 3px;
+        transition: all .2s;
+    }
+
+    &:hover {
+        background-color: $color-primary;
+        color: $color-white;
+        box-shadow: 0 1rem 2rem rgba($color-black,.15);
+        transform: translateY(-2px);
+    }
+
+    &:active {
+        box-shadow: 0 .5rem 1rem rgba($color-black,.15);
+        transform: translateY(0px);
+    }
+}
